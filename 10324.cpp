@@ -26,8 +26,6 @@ int main(int argc, char* argv[]) {
                 printf("Yes\n");
             else
                 printf("No\n");
-
-            //printf("endloop 2\n");
         }
 
         globalCounter++;
