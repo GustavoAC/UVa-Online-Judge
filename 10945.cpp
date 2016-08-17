@@ -3,34 +3,22 @@
 #include <cctype>
 
 bool equalsInvalidChar(const char &a) {
-    if (a == ' ' or a == '.' or a == ',' or a == '!' or a == '?') {
-        std::cout << a << " a shit\n";
+    if (a == ' ' or a == '.' or a == ',' or a == '!' or a == '?')
         return true;
-    }
     return false;
 }
 
 int main(int argc, char* argv[]) {
-
     std::string line;
     bool isPalindrome;
 
     while (getline(std::cin, line) and line != "DONE") {
         isPalindrome = true;
         for (int i = 0, j = line.size()-1; i <= j and isPalindrome; ++i, j--) {
-            while (equalsInvalidChar(line[i])) {
-                i++;
-                std::cout << "skipped i\n";
-            }
-            while (equalsInvalidChar(line[j])) {
-                j++;
-                std::cout << "skipped j\n";
-            }
+            while (equalsInvalidChar(line[i])) i++;
+            while (equalsInvalidChar(line[j])) j--;
 
-            if (line[i] != line[j]){
-                isPalindrome = false;
-                std::cout << "failed at "<< i << " and " << j << "\n";
-            }
+            if (tolower(line[i]) != tolower(line[j])) isPalindrome = false;
         }
 
         if (isPalindrome)
