@@ -43,13 +43,7 @@ int main(int argc, char const *argv[]) {
 				}
 			}
 
-			// for (int i = 1; i <= 100; ++i){
-			// 		std::cout << teams[i].id << " " << teams[i].accepted << " "
-			// 		          << teams[i].penalty << "\n";
-			// }
-
 			std::sort(teams.begin() + 1, teams.end(), compare);
-		//	std::sort(teams.begin() + 1, teams.end(), compare);
 
 			for (int i = 1; i <= 100; ++i){
 				if (teams[i].participating) {
