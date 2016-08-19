@@ -1,51 +1,35 @@
 #include <iostream>
 #include <cstring>
-
-int kindaBinarySearch(const char &aliveSoldiers, int left, int right) {
-	int mid = (left + right)/2;
-	while (left <= right) {
-		if (aliveSoldiers[mid]) left = mid + 1;
-		else {
-		}
-	}
-}
+#include <vector>
 
 int main(int argc, char const *argv[]) {
-	char aliveSoldiers[100001];
-	int numSoldiers, reports, deathsStart, deathsEnd, numCases = 0;
+	
+	int numSoldiers, reports, deathsStart, deathsEnd;
 
 	while (std::cin >> numSoldiers >> reports and numSoldiers and reports) {
-		std::memset(aliveSoldiers, 1, sizeof(aliveSoldiers));
-		if (numCases++) std::cout << "\n";
+
+		std::vector<int> leftAlive(100001);
+		std::vector<int> rightAlive(100001);
+
+		for (int i = 1; i < numSoldiers; ++i) {
+			leftAlive[i] = i-1;
+			rightAlive[i] = i+1;
+		}
+		rightAlive[numSoldiers+1] = 0;
 
 		for (int i = 0; i < reports; ++i) {
 			std::cin >> deathsStart >> deathsEnd;
-			std::memset(aliveSoldiers + deathsStart, 0, deathsEnd - deathsStart + 1);
 
-			// busca meio que binaria aqui em baixo
-			// int j;
-			// for (j = deathsStart-1; !aliveSoldiers[j] and j > 0; j--);
-			// if (j > 0) std::cout << j;
-			// else std::cout << "*";
+			rightAlive[leftAlive[deathsStart]] = rightAlive[deathsEnd];
+			leftAlive[rightAlive[deathsEnd]] = leftAlive[deathsStart];
 
-			int left, right, mid;
-			for (left = 1, right = deathsStart-1; left <= right; ) {
-				mid =(left + right)/2;
-				if (aliveSoldiers[mid]) left = mid + 1;
-				else {
+			if (leftAlive[deathsStart]) std::cout << leftAlive[deathsStart];
+			else std::cout << "*";
 
-				}
-			}
-
-
-
-			for (j = deathsEnd+1; !aliveSoldiers[j] and j <= numSoldiers; j++);
-			if (j <= numSoldiers) std::cout << " " << j;
-			else std::cout << " *";
-
-			std::cout << "\n";
+			if (rightAlive[deathsEnd]) std::cout << " " << rightAlive[deathsEnd] << "\n";
+			else std::cout << " *\n";			
 		}
-		std::cout << "-";
+		std::cout << "-\n";
 	}
 
 	return 0;
